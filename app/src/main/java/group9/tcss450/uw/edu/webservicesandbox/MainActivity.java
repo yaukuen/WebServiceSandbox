@@ -3,6 +3,7 @@ package group9.tcss450.uw.edu.webservicesandbox;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -94,12 +95,13 @@ public class MainActivity extends AppCompatActivity {
             if (strings.length != 2) {
                 throw new IllegalArgumentException("Two String arguments required.");
             }
+            Log.d("name", strings[1]);
             String response = "";
             HttpURLConnection urlConnection = null;
             String url = strings[0];
             String args = "?my_name=" + strings[1];
             try {
-                URL urlObject = new URL(url + SERVICE);
+                URL urlObject = new URL(url + SERVICE + args);
                 urlConnection = (HttpURLConnection) urlObject.openConnection();
                 InputStream content = urlConnection.getInputStream();
                 BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             // Something wrong with the network or the URL.
             if (result.startsWith("Unable to")) {
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                return;
             }
             mTextView.setText(result);
         }
