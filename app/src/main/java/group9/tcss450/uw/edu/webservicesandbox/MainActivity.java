@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             if (strings.length != 2) {
                 throw new IllegalArgumentException("Two String arguments required.");
             }
-            Log.d("name", strings[1]);
+            //Log.d("name", strings[1]);
             String response = "";
             HttpURLConnection urlConnection = null;
             String url = strings[0];
